@@ -14,8 +14,8 @@ root.render(
         <NavbarComp />
         <Routes>
             <Route path="/" element={<JobFinderApp />} />
-            <Route path="/acceder" element={<Login />} />
-            <Route path="/crear" element={<SignIn />} />
+            <Route path="/acceder" element={<SignIn  />} />
+            <Route path="/crear" element={<Login/>} />
         </Routes>
     </BrowserRouter>
 );
