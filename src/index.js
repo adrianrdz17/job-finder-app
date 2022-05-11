@@ -7,6 +7,7 @@ import JobFinderApp from './JobFinderApp';
 import Login from './components/Login';
 import NavbarComp from './components/NavbarComp';
 import SignIn from './components/SignIn';
+import Footer from './components/Footer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,8 +15,9 @@ root.render(
         <NavbarComp />
         <Routes>
             <Route path="/" element={<JobFinderApp />} />
-            <Route path="/acceder" element={<SignIn  />} />
-            <Route path="/crear" element={<Login/>} />
+            <Route path="/acceder" element={<SignIn />} />
+            <Route path="/crear" element={<Login />} />
         </Routes>
+        <Footer />
     </BrowserRouter>
 );

@@ -7,10 +7,18 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+.color-nav {
+    background-color: #002b99;
+}
+
 .nav-link {
     text-decoration: none;
 }
 
 .common-container {
+    margin-top: 5%;
+}
+
+.secondary-container {
     margin-top: 3%;
 }

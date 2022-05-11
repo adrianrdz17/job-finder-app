@@ -5,7 +5,12 @@ import { Link } from 'react-router-dom';
 const NavbarComp = () => {
     return (
         <>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar
+                collapseOnSelect
+                expand="lg"
+                className="color-nav"
+                variant="dark"
+            >
                 <Container>
                     <Navbar.Brand>
                         <Link to={`/`} className="nav-link">
@@ -14,11 +19,7 @@ const NavbarComp = () => {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="me-auto">
-                            <Nav.Link href="#features" className="nav-link">
-                                ¿Quienes somos?
-                            </Nav.Link>
-                        </Nav>
+                        <Nav className="me-auto"></Nav>
                         <Nav>
                             <Nav.Link>
                                 <Link to={`/crear`} className="nav-link">
