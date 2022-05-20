@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import imageMain from '../img/laptop-gcba373556_1920.jpg';
 import { Link } from 'react-router-dom';
-import './sigIn.css';
+import './signIn.css';
 const SignIn = () => {
     return (
         <div className="contenedor">
