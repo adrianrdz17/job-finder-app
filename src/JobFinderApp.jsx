@@ -1,38 +1,43 @@
-import React from 'react';
-import { Container, Row, Col, Button, Figure } from 'react-bootstrap';
+import React, { useContext, useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import { authContext } from './Context/AuthContext';
 
-import imageMain from './img/man-with-magnifying-glass-over-white-background.jpg';
+import NavbarComp from './components/NavbarComp';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import NotFound from './pages/NotFound';
+import { postWithToken } from './api';
 
 const JobFinderApp = () => {
+    const context = useContext(authContext);
+
+    useEffect(() => {
+        postWithToken('/api/auth/validate').then(({ data }) => {
+            if (data.failed) {
+                console.log(data);
+            } else {
+                context.setAuth({
+                    id: data.user.id,
+                    name: data.user.name,
+                    logged: true,
+                });
+            }
+        });
+    }, []);
+
     return (
-        <div>
-            <Container className="common-container">
-                <Row>
-                    <Col>
-                        <h2>Encuentre su proximo empleo</h2>
-                        <p className="secondary-container">
-                            Sabemos porque esta aquí, y lo ayudaremos a ello.
-                        </p>
-                        <Button className="secondary-container" variant="info">
-                            Ofertas disponibles
-                        </Button>
-                    </Col>
-                    <Col>
-                        <Container className="mx-auto my-auto">
-                            <Figure>
-                                <Figure.Image
-                                    className="center-block"
-                                    width={400}
-                                    height={400}
-                                    alt="171x180"
-                                    src={imageMain}
-                                />
-                            </Figure>
-                        </Container>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+        <>
+            <NavbarComp />
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/acceder" element={<Login />} />
+                <Route path="/crear" element={<SignUp />} />
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+            <Footer />
+        </>
     );
 };
 

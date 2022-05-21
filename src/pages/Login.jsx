@@ -1,49 +1,76 @@
-import { Button, Form } from 'react-bootstrap';
-import './login.css';
-import imgSelect from '../img/descarga.png';
+import React, { useContext, useRef } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import { authContext } from '../Context/AuthContext';
+import imageMain from '../img/laptop-gcba373556_1920.jpg';
+import { Link, useNavigate } from 'react-router-dom';
+import { post } from '../api';
+import './signIn.css';
 
 const Login = () => {
-    return (
-        <div className="fondo">
-            <navbar className="img-contenedor2">
-                <img src={imgSelect} />
-                <h6>Experiencia laboral</h6>
-                <p>¿Tienes experiencia que añadir?</p>
-            </navbar>
-            <div className="form">
-                <Form className="zindex-2">
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Prueba</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
-                    </Form.Group>
+    const context = useContext(authContext);
 
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control
-                            type="email"
-                            placeholder="Enter email"
-                        />{' '}
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control
-                            type="email"
-                            placeholder="Enter email"
-                        />{' '}
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
-                    </Button>
-                </Form>
-            </div>
+    const navigate = useNavigate();
+
+    const login = (event) => {
+        event.preventDefault();
+
+        console.log(email, password);
+
+        post('/api/auth/login', {
+            email: email.current.value,
+            password: password.current.value,
+        }).then((data) => {
+            const { token, user } = data.data;
+            localStorage.setItem('token', token);
+            context.setAuth({
+                id: user.id,
+                name: user.name,
+                logged: true,
+            });
+            navigate('/', {
+                replace: true,
+            });
+        });
+    };
+
+    const email = useRef();
+    const password = useRef();
+
+    return (
+        <div className="contenedor">
+            <figure className="contenedor-img">
+                <img alt="Encuentre el trabajo de sus sueños" src={imageMain} />
+            </figure>
+            <Form className=" w-50 p-5   bg-white" onSubmit={login}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Correo:</Form.Label>
+                    <Form.Control
+                        placeholder="Introduzca su correo"
+                        ref={email}
+                        type="email"
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Contraseña</Form.Label>
+                    <Form.Control
+                        placeholder="Introduzca su contraseña"
+                        ref={password}
+                        type="password"
+                    />
+                </Form.Group>
+
+                <Button
+                    variant="primary"
+                    type="submit"
+                    className="btn btn-primary btn-lg"
+                >
+                    Enviar
+                </Button>
+                <Link to={`/crear`} className="link-primary ms-2">
+                    Olvide mi contraseña
+                </Link>
+            </Form>
         </div>
     );
 };
