@@ -64,6 +64,7 @@ const deleteWithToken = async (url, data) => {
     };
 };
 
+
 export default instance;
 
 export { post, postWithToken, putWithToken, deleteWithToken };

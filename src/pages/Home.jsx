@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button, Figure } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import imageMain from '../img/man-with-magnifying-glass-over-white-background.jpg';
 
 const Home = () => {
@@ -12,9 +13,9 @@ const Home = () => {
                         <p className="secondary-container">
                             Sabemos porque esta aquí, y lo ayudaremos a ello.
                         </p>
-                        <Button className="secondary-container" variant="info">
+                        <Link to={'/trabajos'} className="btn btn-primary" variant="info">
                             Ofertas disponibles
-                        </Button>
+                        </Link>
                     </Col>
                     <Col>
                         <Container className="mx-auto my-auto">

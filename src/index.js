@@ -5,7 +5,6 @@ import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import JobFinderApp from './JobFinderApp';
 import AuthProvider from './Context/AuthContext';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <AuthProvider>

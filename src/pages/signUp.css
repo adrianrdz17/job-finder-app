@@ -1,0 +1,127 @@
+@media all and (min-width: 320px) {
+    .fondo {
+        background: #fff;
+        height: 30em;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    #img-contenedor2 {
+        height: 9em;
+        padding: 1em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eaf9f9;
+        flex-direction: column;
+    }
+    #img-contenedor2 > img {
+        height: 5em;
+    }
+    #img-contenedor2 > h6 {
+        color: rgba(2, 2, 2, 0.732);
+    }
+    #img-contenedor2 > p {
+        font-size: small;
+    }
+    .formulario {
+        margin:0.3em;
+        height: 18em;
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-shadow: 0px 2px 10px 7px rgba(0, 0, 0, 0.2);
+    }
+    .formulario > button{
+        width: 80%;
+    }
+    .formulario > div{
+        width: 80%;
+    }
+}
+
+@media all and (min-width: 768px) {
+    .fondo {
+        background: #fff;
+        height: 45em;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #img-contenedor2 {
+        height: 11.7em;
+        width: 100%;
+        padding: 9em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eaf9f9;
+        flex-direction: column;
+        margin-bottom: 2em;
+    }
+    #img-contenedor2 > img {
+        height: 8em;
+    }
+    #img-contenedor2 > h6 {
+        color: rgba(2, 2, 2, 0.732);
+        font-size: 2em;
+    }
+    #img-contenedor2 > p {
+        font-size: 1.5em;
+    }
+    .formulario {
+        padding: 1.5em;
+        height: 20em;
+        width: 25em;
+    }
+    .formulario > button{
+        width: 70%;
+    }
+    .formulario > div{
+        width: 70%;
+    }
+}
+
+@media all and (min-width: 900px) {
+    .fondo {
+        background: #fff;
+        height: 45em;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #img-contenedor2 {
+        width: 100%;
+        padding: 8em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #eaf9f9;
+        flex-direction: column;
+        margin-bottom: 2em;
+    }
+    #img-contenedor2 > img {
+        height: 8em;
+    }
+    #img-contenedor2 > h6 {
+        color: rgba(2, 2, 2, 0.732);
+        font-size: 1.5em;
+    }
+    #img-contenedor2 > p {
+        font-size: 1.5em;
+    }
+    .formulario {
+        padding: 1.5em;
+        height: 25em;
+        width: 30em;
+    }
+    .formulario > button{
+        width: 70%;
+    }
+    .formulario > div{
+        width: 70%;
+    }
+}

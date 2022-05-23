@@ -67,9 +67,6 @@ const Login = () => {
                 >
                     Enviar
                 </Button>
-                <Link to={`/crear`} className="link-primary ms-2">
-                    Olvide mi contraseña
-                </Link>
             </Form>
         </div>
     );

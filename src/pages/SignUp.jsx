@@ -1,119 +1,119 @@
-import './login.css';
-import imgSelect from '../img/descarga.png';
-import { useState, useRef } from 'react';
-import context from 'react-bootstrap/esm/AccordionContext';
-import { post } from '../api';
-import { useNavigate } from 'react-router-dom';
+import "./signUp.css";
+import imgSelect from "../img/descarga.png";
+import { useState,useRef, useContext } from "react";
+import { authContext } from "../Context/AuthContext";
+import { post } from "../api";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const [value, setValue] = useState({
-        name: '',
-        lastname: '',
-        email: '',
-        role: '',
-        password: '',
+
+  const context = useContext(authContext);
+  const email = useRef()
+  const password = useRef()
+  const name = useRef()
+  const role = useRef()
+
+  const navigate = useNavigate();
+
+  const [error,setError] = useState({
+    isError:false,
+    message:"",
+    loading:false
+  })
+  const signUp =  async (event) =>{
+    event.preventDefault()
+
+    console.log(role.current.value)
+    setError({...error,loading:true})
+    post("/api/auth/signup",{
+      name:name.current.value,
+      email: email.current.value,
+      password:password.current.value,
+      role:role.current.value
     })
-    const form = useRef();
-    const navigate = useNavigate();
-
-
-    const signUp = (event) =>{
-      event.preventDefault()
-
-      post("/api/auth/login",{ 
-          name:form.name.current.value,
-          lastName:form.name.current.value,
-          email: form.email.current.value,
-          password:form.password.current.value,
-          role:form.role.current.value
+    .then(({data})=>{
+      setError({...error,loading:false})
+      localStorage.setItem("token",data.token)
+      context.setAuth({
+        id:data.user.id,
+        name:data.user.name,
+        logged:true
       })
-      .then(data=>{
-          const {token,user} = data.data
-          localStorage.setItem("token",token) 
-          context.setAuth({
-              id:user.id,
-              name:user.name,
-              logged:true
-          })
-          navigate("/",{
-              replace:true
-          })
+    },
+    await navigate('/',{
+      replace:true
+    })
+    )
+    .catch(error=>{
+      console.log(error.response.data)
+      setError({
+        isError:true,
+        message:error.response.data.message,
+        loading:false
       })
-    
-    } 
-    const handleChange = (e) => {
-        setValue((state) => ({
-            ...state,
-            [e.target.name]: e.target.value,
-        }));
-    };
+    })
+
+}
+
     return (
-        <div className="fondo">
-            <header id="img-contenedor2">
-                <img src={imgSelect} />
-                <h6>Experiencia laboral</h6>
-                <p>¿Tienes experiencia que añadir?</p>
-            </header>
-            <main className="container-fluid d-flex justify-content-center w-50">
-                <form ref={form} className="mb-3 w-50 mt-3 shadow p-3 mb-5 bg-body rounded" onSubmit={signUp}>
-                    <div className="mb-3">
-                        <input
-                            type="text"
-                            onChange={handleChange}
-                            className="form-control"
-                            placeholder="Nombre"
-                            value={value.name}
-                            name="name"
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <input
-                            type="text"
-                            onChange={handleChange}
-                            className="form-control"
-                            placeholder="Apellido"
-                            value={value.lastname}
-                            name="lastname"
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <input
-                            type="email"
-                            onChange={handleChange}
-                            className="form-control"
-                            placeholder="Correo
-                            ref={email}"
-                            value={value.email}
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <input
-                            type="password"
-                            onChange={handleChange}
-                            className="form-control"
-                            placeholder="Contraseña"
-                            value={value.password}
-                            name="password"
-                        />
-                    </div>
-                    <div className="mb-3">
-                        <select
-                            className="form-control"
-                            name="role"
-                            onChange={handleChange}
-                            value={value.role}
-                        >
-                            <option value="">-Seleccione una opción--</option>
-                            <option value="applicant">Aplicante</option>
-                            <option value="employer">Empleador</option>
-                        </select>
-                    </div>
+      <div className="fondo">
+        <header id="img-contenedor2">
+          <img src={imgSelect}/>
+          <h6>¿Inseguro al conseguir empleo?</h6>
+          <p>Nosotros lo resolvemos. No esperes mas, crea tu usuario</p>
+        </header>
+        <main className="container-fluid d-flex justify-content-center w-100">
+          <form
+            className="formulario"
+            onSubmit={signUp}
+          >
+            <div className="mb-3">
+              <input
+                ref={name}
+                type="text"
+                className="form-control"
+                placeholder="Nombre"
+                name="name"
+              />
+            </div>
+            <div className="mb-3">
+            </div>
+            <div className="mb-3">
+              <input
+                ref={email}
+                type="email"
+                className="form-control"
+                placeholder="Correo"
+                name="email"
+              />
+            </div>
+            <div className="mb-3">
+              <input
+                ref={password}
+                type="password"
+                className="form-control"
+                placeholder="Contraseña"
+                name="password"
+              />
+            </div>
+            <div className="mb-3">
+              <select
+                ref={role}
+                className="form-control"
+                name="role"
+              >
+                <option value="">-Seleccione una opción--</option>
+                <option value="applicant">Aplicante</option>
+                <option value="employer">Empleador</option>
+              </select>
+            </div>
 
-                    <button className="btn btn-primary">Enviar</button>
-                </form>
-            </main>
-        </div>
+            <button className="btn btn-primary">Enviar</button>
+          </form>
+
+        </main>
+      </div>
     );
-};
+  };
 
 export default Login;

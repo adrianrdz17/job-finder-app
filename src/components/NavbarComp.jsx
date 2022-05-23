@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { authContext } from '../Context/AuthContext';
+import LogOut from './LogOut';
 
 const NavbarComp = () => {
+  const context = useContext(authContext)
+  
     return (
         <>
             <Navbar
@@ -20,10 +24,11 @@ const NavbarComp = () => {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto"></Nav>
-                        <Nav>
+                        {context.auth.logged?<LogOut />:
+                        <Nav>  
                             <Nav.Link>
                                 <Link to={`/crear`} className="nav-link">
-                                    Crea tu CV
+                                    Crear usuario
                                 </Link>
                             </Nav.Link>
                             <Nav.Link>
@@ -32,6 +37,7 @@ const NavbarComp = () => {
                                 </Link>
                             </Nav.Link>
                         </Nav>
+                        }
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

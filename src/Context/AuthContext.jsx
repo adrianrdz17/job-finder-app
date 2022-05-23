@@ -6,7 +6,7 @@ export default function AuthProvider({ children }) {
     const [auth, setAuth] = useState({
         id: '',
         name: '',
-        looged: false,
+        logged: false,
     });
 
     return (
