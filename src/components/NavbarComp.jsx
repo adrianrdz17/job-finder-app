@@ -18,7 +18,7 @@ const NavbarComp = () => {
                         </Nav.Link>
                         {!context.auth.logged && (
                             <>
-                                <Nav.Link href='#'>
+                                <Nav.Link  href='#'>
                                     <Link to='/login'>Login</Link>
                                 </Nav.Link>
                                 <Nav.Link href='#'>

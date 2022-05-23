@@ -15,7 +15,7 @@ export default function LogOut() {
         })
     }
     return (
-        <button onClick={handleLogOut}>
+        <button className='btn btn-dark mx-4' onClick={handleLogOut}>
             Cerrar sesión
         </button>
     )
