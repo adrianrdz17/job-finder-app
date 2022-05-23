@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { authContext } from './Context/AuthContext';
 
 import NavbarComp from './components/NavbarComp';
@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import NotFound from './pages/NotFound';
 import { postWithToken } from './api';
+import { Container } from 'react-bootstrap';
 
 const JobFinderApp = () => {
     const context = useContext(authContext);
@@ -30,12 +31,14 @@ const JobFinderApp = () => {
     return (
         <>
             <NavbarComp />
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/acceder" element={<Login />} />
-                <Route path="/crear" element={<SignUp />} />
-                <Route path="*" element={<NotFound />} />
-            </Routes>
+            <Container>
+                <Routes>
+                    <Route path='/' element={<Home />} />
+                    <Route path='/login' element={<Login />} />
+                    <Route path='/signup' element={<SignUp />} />
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
+            </Container>
             <Footer />
         </>
     );

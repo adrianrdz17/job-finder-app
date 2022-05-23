@@ -1,38 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { authContext } from '../Context/AuthContext';
+import LogOut from './LogOut';
 
 const NavbarComp = () => {
+    const context = useContext(authContext);
+
     return (
         <>
-            <Navbar
-                collapseOnSelect
-                expand="lg"
-                className="color-nav"
-                variant="dark"
-            >
+            <Navbar bg='dark' variant='dark'>
                 <Container>
-                    <Navbar.Brand>
-                        <Link to={`/`} className="nav-link">
-                            Job Finder
-                        </Link>
-                    </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-                    <Navbar.Collapse id="responsive-navbar-nav">
-                        <Nav className="me-auto"></Nav>
-                        <Nav>
-                            <Nav.Link>
-                                <Link to={`/crear`} className="nav-link">
-                                    Crea tu CV
-                                </Link>
-                            </Nav.Link>
-                            <Nav.Link>
-                                <Link to={`/acceder`} className="nav-link">
-                                    Inicia sesion
-                                </Link>
-                            </Nav.Link>
-                        </Nav>
-                    </Navbar.Collapse>
+                    <Navbar.Brand href='#'>Job Finder App</Navbar.Brand>
+                    <Nav className='me-auto'>
+                        <Nav.Link href='#'>
+                            <Link to='/'>Home</Link>
+                        </Nav.Link>
+                        {!context.auth.logged && (
+                            <>
+                                <Nav.Link href='#'>
+                                    <Link to='/login'>Login</Link>
+                                </Nav.Link>
+                                <Nav.Link href='#'>
+                                    <Link to='/signup'>SignUp</Link>
+                                </Nav.Link>
+                            </>
+                        )}
+                    </Nav>
+                    {context.auth.logged && (
+                        <Navbar.Text className='ml-8'>
+                            Signed in as: {context.auth.name}
+                        </Navbar.Text>
+                    )}
+                    {context.auth.logged && <LogOut className='ml-3' />}
                 </Container>
             </Navbar>
         </>

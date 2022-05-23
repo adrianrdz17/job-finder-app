@@ -1,8 +1,7 @@
 import React, { useContext, useRef } from 'react';
-import { Form, Button } from 'react-bootstrap';
 import { authContext } from '../Context/AuthContext';
 import imageMain from '../img/laptop-gcba373556_1920.jpg';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { post } from '../api';
 import './signIn.css';
 
@@ -37,40 +36,38 @@ const Login = () => {
     const password = useRef();
 
     return (
-        <div className="contenedor">
-            <figure className="contenedor-img">
-                <img alt="Encuentre el trabajo de sus sueños" src={imageMain} />
+        <div className='contenedor'>
+            <figure className='contenedor-img'>
+                <img alt='Encuentre el trabajo de sus sueños' src={imageMain} />
             </figure>
-            <Form className=" w-50 p-5   bg-white" onSubmit={login}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Correo:</Form.Label>
-                    <Form.Control
-                        placeholder="Introduzca su correo"
+
+            <form onSubmit={login}>
+                <div className='mb-3'>
+                    <label for='emailInput' className='form-label'>
+                        Email address
+                    </label>
+
+                    <input
+                        className='form-control'
                         ref={email}
-                        type="email"
+                        id='emailInput'
+                        placeholder='Ingrese su email'
+                        type='email'
                     />
-                </Form.Group>
-
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Contraseña</Form.Label>
-                    <Form.Control
-                        placeholder="Introduzca su contraseña"
+                </div>
+                <div className='mb-3'>
+                    <label for='passwordInput' className='form-label'>Password</label>
+                    <input
+                        id='passwordInput'
+                        className='form-control'
                         ref={password}
-                        type="password"
+                        placeholder='Ingrese su password'
+                        type='password'
                     />
-                </Form.Group>
+                </div>
 
-                <Button
-                    variant="primary"
-                    type="submit"
-                    className="btn btn-primary btn-lg"
-                >
-                    Enviar
-                </Button>
-                <Link to={`/crear`} className="link-primary ms-2">
-                    Olvide mi contraseña
-                </Link>
-            </Form>
+                <button>Login</button>
+            </form>
         </div>
     );
 };
